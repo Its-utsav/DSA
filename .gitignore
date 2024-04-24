@@ -1,0 +1,30 @@
+# Ignore compiled files
+*.pyc
+*.pyo
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore distribution/build directories
+__pycache__/
+build/
+dist/
+*.egg-info/
+
+# Ignore node_modules directory for JavaScript
+node_modules/
+
+# Ignore compiled binaries for C++
+*.o
+*.obj
+*.a
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Ignore Visual Studio Code settings
+.vscode/
