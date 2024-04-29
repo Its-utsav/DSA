@@ -1,0 +1,13 @@
+C:\Users\utsav\OneDrive\Desktop\DSA\cpp>g++ 01-basics\main.cpp && a < .\input.txt > .\output.txt && del a.exe
+
+[
+        "/C",
+        "g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension} < .\\input.txt > output.txt && del ${fileBasenameNoExtension}"
+      ]
+
+[
+    "/C",
+    "g++ ${file} -o ${fileBasenameNoExtension} &&
+    .\\{fileBasenameNoExtension} < .\\input.txt > .\\output.txt && del ${fileBasenameNoExtension}.exe
+    " ,
+]
