@@ -413,7 +413,7 @@ void pattern21(int n)
 
 int main()
 {
-    int n = 4;
+    int n = 5;
 
     // pattern1(n);
     // pattern2(n);
