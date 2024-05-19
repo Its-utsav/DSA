@@ -253,9 +253,50 @@ void pattern16(int n)
     }
 }
 
-void pattern17() {}
+void pattern17(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        // space
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            cout << " ";
+        }
+        // ch
+        char ch = 'A';
 
-void pattern18() {}
+        int mead = (i * 2 + 1) / 2;
+        for (int k = 0; k < 2 * i + 1; k++)
+        {
+            cout << ch;
+
+            if (k < mead)
+                ch++;
+            else
+                ch--;
+        }
+        // sapce
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            cout << " ";
+        }
+        cout << "\n";
+    }
+}
+
+void pattern18(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+
+        for (char ch = ('A'+ n - i) - 1; ch <= ('A' + n - 1); ch++)
+        {
+            cout << ch << " ";
+        }
+
+        cout << "\n";
+    }
+}
 
 void pattern19(int n)
 {
@@ -389,6 +430,9 @@ int main()
     // pattern13(n);
     // pattern14(n);
     // pattern15(n);
+    // pattern16(n);
+    // pattern17(n);
+    pattern18(n);
     // pattern19(n);
     // pattern20(n);
     // pattern21(n);

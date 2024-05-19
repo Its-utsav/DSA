@@ -1,0 +1,6 @@
+# ignore input and output file 
+
+**/input.txt
+**/output.txt
+
+

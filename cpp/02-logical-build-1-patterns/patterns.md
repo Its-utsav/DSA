@@ -187,6 +187,39 @@ A
 
 ```
 
+
+## pattern 16
+
+```txt
+A 
+B B 
+C C C 
+D D D D 
+
+```
+
+## pattern 17
+
+```txt
+   A   
+  ABA  
+ ABCBA 
+ABCDCBA
+
+
+```
+
+
+## pattern 18
+
+```txt
+D 
+C D 
+B C D 
+A B C D 
+
+```
+
 ## pattern 19
 
 ```txt
