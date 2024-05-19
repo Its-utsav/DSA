@@ -1,5 +1,7 @@
 # patterns
 
+- all pattern only in `C++`
+
 ## toc
 
 1. [pattern 1](#pattern-1)
@@ -141,11 +143,11 @@
 
 ```txt
 
-1 
-0 1 
-1 0 1 
-0 1 0 1 
-1 0 1 0 1 
+1
+0 1
+1 0 1
+0 1 0 1
+1 0 1 0 1
 
 ```
 
@@ -162,61 +164,58 @@
 ## pattern 13
 
 ```txt
-1 
-2 3 
-4 5 6 
+1
+2 3
+4 5 6
 
 ```
-
 
 ## pattern 14
 
 ```txt
-A 
-A B 
-A B C 
+A
+A B
+A B C
 
 ```
 
 ## pattern 15
 
 ```txt
-A B C 
-A B 
-A 
+A B C
+A B
+A
 
 ```
-
 
 ## pattern 16
 
 ```txt
-A 
-B B 
-C C C 
-D D D D 
+A
+B B
+C C C
+D D D D
 
 ```
 
 ## pattern 17
 
 ```txt
-   A   
-  ABA  
- ABCBA 
+   A
+  ABA
+ ABCBA
 ABCDCBA
 
 
 ```
 
-
 ## pattern 18
 
 ```txt
-D 
-C D 
-B C D 
-A B C D 
+D
+C D
+B C D
+A B C D
 
 ```
 
