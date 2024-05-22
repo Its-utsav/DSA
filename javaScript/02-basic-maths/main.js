@@ -59,11 +59,11 @@ class MathsBasics {
   }
 }
 
-let n = 11;
+// let n = 11;
 
-let x = new MathsBasics(n);
+// let x = new MathsBasics(n);
 
-console.log(x.checkPrime());
+//  console.log(x.checkPrime());
 
 // function countDigit(n) {
 //   let count = 0;
@@ -200,7 +200,7 @@ function checkPrime(n) {
 // 12 = 1,2,3,4,6,12 // GCD = 3
 
 function gcdFind(num1, num2) {
-  let gcd = 1;
+  // let gcd = 1;
 
   // one
 
@@ -211,18 +211,31 @@ function gcdFind(num1, num2) {
   //   }
 
   // second
-  let minNum = Math.min(num1, num2);
-  for (let i = 1; i <= minNum; i++) {
-    if (num1 % i == 0 && num2 % i == 0) {
-      gcd = i;
-    }
-  }
-  return gcd;
+  // let minNum = Math.min(num1, num2);
+  // for (let i = 1; i <= minNum; i++) {
+  //   if (num1 % i == 0 && num2 % i == 0) {
+  //     gcd = i;
+  //   }
+  // }
+  // return gcd;
 
   // TC O(min(n1,n2))
   // however their are efficent algo for big numbers
 
   //   Euclidean Algorithm
+
+  if (num1 == 0) return num2;
+  if (num2 == 0) return num1;
+
+  while (num1 != num2) {
+    if (num1 > num2) {
+      num1 = num1 - num2;
+    } else {
+      num2 = num2 - num1;
+    }
+  }
+  return num1;
+  // TC O(min(n1,n2))
 }
 
 let n1 = 9;
@@ -230,4 +243,4 @@ let n2 = 12;
 
 let ans = gcdFind(n1, n2);
 
-// console.log(`GCD of ${n1} and ${n2} is ${ans}`);
+console.log(`GCD of ${n1} and ${n2} is ${ans}`);

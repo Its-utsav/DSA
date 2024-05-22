@@ -6,10 +6,11 @@
 2. [Reverse the Number](#reverese-the-number)
 3. [Armstrong Number](#armstrong-number)
 4. [Print All Divisor](#print-all-divisor)
+5. [Euclidean Algo](#eucliden-algorithm)
 
 ## count digit
 
-![](https://cdn.discordapp.com/attachments/1242484160547913860/1242484254332682291/diagram-export-21-5-2024-7_56_56-pm.png?ex=664e0122&is=664cafa2&hm=87a0e0cff204cf0894611dc8662fc71c2f8583fbd46666482dea106bec548a0c&)
+![count digit](.\images\count-digit.png)
 
 1. N from user
 2. go unitl n greater than xero
@@ -83,3 +84,42 @@ $$
   num2 12 = 1,2,3,6,12
 
 so GCD here will 3
+
+## Eucliden Algorithm
+
+- gcd can find with this formula
+
+$$
+gcd(a,b) = gcd(a-b,b)
+$$
+
+- more simpilfy
+
+$$
+gcd(a,b) = gcd(a \% b,b)
+$$
+
+- we can achivve with help of recursion or with looping
+- keep finding gcd until one of the parameter either `a` or `b` became `0`
+- example
+
+a => 12 = 1,2,3,4,6,12
+b => 9 = 1,2,3,9
+
+$$
+gcd(a,b) = gcd(a-b,b)
+$$
+
+$$
+gcd(72,24) = gcd(48,24)
+$$
+
+$$
+gcd(72,24) = gcd(24,24)
+$$
+
+$$
+gcd(72,24) = gcd(0,24)
+$$
+
+- here we go gcd(72,24) = 24
