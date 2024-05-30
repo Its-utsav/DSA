@@ -124,11 +124,16 @@ int euclideanAlgo(int n1, int n2)
         if (n1 > n2)
         {
             n1 = n1 - n2;
-        }else{
-            n2 = n2 -n1;
+        }
+        else
+        {
+            n2 = n2 - n1;
         }
     }
     return n1;
+}
+int decimalToBn(int n)
+{
 }
 
 int main()
@@ -144,7 +149,27 @@ int main()
     // bool prime = checkPrime(num);
     int num1 = 9;
     int num2 = 12;
-    int gcd = euclideanAlgo(num1, num2);
-    cout << gcd;
+    // int gcd = euclideanAlgo(num1, num2);
+    // cout << gcd;
+    // devimal to binary
+    decimalToBn(num);
+
     return 0;
 }
+/**
+ int main() {
+   int n = -6;
+//   int ans = 0;
+//   int i = 0;
+//   while(n!=0){
+//         int lastBit = n & 1;
+//         ans = (lastBit * pow(10,i)) + ans;
+//         n = n >> 1;
+//         i++;
+//   } // potoive intger
+// negtave number
+
+    std::cout << bitset<32>(n)<< "\n  program execute ";
+    return 0;
+}
+*/
