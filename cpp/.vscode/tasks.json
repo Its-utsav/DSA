@@ -4,12 +4,11 @@
     {
       "label": "Compile and Run",
       "type": "shell",
-      "command": "cmd",
+      "command": "bash",
       "args": [
-        "/C",
-        "g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension} < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe"
-      ]
-      ,
+        "-c",
+        "g++ ${file} -o ${fileBasenameNoExtension} && ./${fileBasenameNoExtension} < ./input.txt > output.txt && rm ${fileBasenameNoExtension}"
+      ],
       "group": {
         "kind": "build",
         "isDefault": true
