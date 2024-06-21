@@ -8,8 +8,7 @@
       "args": [
         "/C",
         "g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension} < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe"
-      ]
-      ,
+      ],
       "group": {
         "kind": "build",
         "isDefault": true
