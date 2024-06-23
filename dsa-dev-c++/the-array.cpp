@@ -216,7 +216,7 @@ int peakIndexInMountainArr(int arr[],int size){
 	int start = 0 , end = size - 1;
 	int mid = start + (end - start) / 2;
 	printArray(arr,size);
-	while(start < mid){
+	while(start < end){
 		if(arr[mid] < arr[mid + 1]){
 			start = mid + 1; 
 		}else{
@@ -231,7 +231,7 @@ int pivoitElmentInRotedSortedArray(int arr[],int size){
 	int start = 0, end = size - 1;
 	int mid = start + (end - start) / 2;
 	
-	while(start < mid ){
+	while(start < end ){
 		if(arr[mid] >= arr[0]){
 			start = mid + 1;
 		}else{
@@ -240,11 +240,76 @@ int pivoitElmentInRotedSortedArray(int arr[],int size){
 		mid = start + (end - start) / 2;
 	}
 	
-	return arr[end];
+//	return arr[end];
+	return end;
 }
 
-int serachElementInRotedSortedArray(int arr[],int size,int key){
+int specialBinarySearch(int arr[],int s,int e,int key){	
+	int start = s;
+	int end = e;
+	int mid = start + (end - start) / 2;
 	
+	while(start <= end){
+		if(arr[mid]==key){
+			return mid;
+		}
+		if(key > arr[mid]){
+			start = mid + 1;
+		}else{
+			end = mid - 1;
+		}
+		mid = start + (end - start) / 2;
+	}
+	return -1;
+}
+
+bool serachElementInRotedSortedArray(int arr[],int size,int key){
+	int pivotElement = pivoitElmentInRotedSortedArray(arr,size);
+	int ans = false;
+	if(key >= arr[pivotElement] && key <= arr[size-1]){
+		ans = specialBinarySearch(arr,pivotElement,size-1,key);
+	}else{
+		ans = specialBinarySearch(arr,0,pivotElement,key);
+	}
+	return ans;
+}
+
+int sqrtOfNum(int num){
+	int start = 0;
+	int end = num;
+	// here long long int for too big number than 2^31(int max range)
+	// prevent from big numbers
+	long long int mid = start + (end - start) / 2;
+	long long int ans = -1;
+	
+	while(start <= end){
+		long long int  sqaure = mid * mid; 
+		if(sqaure == num){
+			return mid;
+		}
+		if(sqaure < num){
+			start = mid + 1;
+			ans = mid;
+		}else{
+			end = mid - 1;
+		}
+		mid = start + (end - start) / 2;
+	}
+	return ans;
+}
+
+double morePrecision(int num,int precisonCount,int intSqrt){
+	double factor = 1; // /10 -> 0.1 -> 0.01 -> 0.001
+	double tempNum = intSqrt;
+
+	for(int i=0;i<precisonCount;i++){
+		factor= factor/ 10;
+		for(double j = tempNum;j*j<num;j=factor + j){
+			tempNum = j; 
+		}
+	}
+		
+	return tempNum;
 }
 int main(){
 	
@@ -343,19 +408,27 @@ int main(){
 	// cout << "Ans is " << ans;
 	
 	
-	// 4. Search Element in Roted Sorted Array
-	int arr[] = {7,9,1,2,3};
-	int size = sizeof(arr) / sizeof(arr[0]);
-	int key = 2;
-	bool ans = serachElementInRotedSortedArray(arr,size,key);
+	// 4. Search Element in Roted Sorted Array 
+	// O (log n) + O (log n)  = O (log n)
+	// int arr[] = {7,9,1,2,3};
+	// int size = sizeof(arr) / sizeof(arr[0]);
+	// int key = 2;
+	// printArray(arr,size);
+	// bool ans = serachElementInRotedSortedArray(arr,size,key);
 	
-	if(ans){
-		cout << key << " Found in array \n";
-	}else{
-		cout << key << " Not Found in array \n";
-	}
+	// if(ans){
+	//	cout << key << " Found in array \n";
+	// }else{
+	// 	cout << key << " Not Found in array \n";
+	// }
+	
+	// 5. Square Root of a number using binary search
+	cout <<"LOL" << endl;
+	int num = 37;
+	int ans = sqrtOfNum(num);
+	cout << ans <<endl;
+	double sqrtWithMorePrecision = morePrecision(num,8,ans);
+	cout << "\n Sqare Root of with more precision " << num << " = " << sqrtWithMorePrecision ; 
 	// -------------------------------------------------------
-	
-	
 	return 0;
 }
