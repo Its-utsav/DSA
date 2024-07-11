@@ -6,8 +6,8 @@
       "type": "shell",
       "command": "bash",
       "args": [
-        "/C",
-        "g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension} < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe"
+        "-c",
+        "if [[ \"$OSTYPE\" == \"msys\" ]]; then g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension}.exe < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe; else g++ ${file} -o ${fileBasenameNoExtension} && ./${fileBasenameNoExtension} < ./input.txt > output.txt; fi"
       ],
       "group": {
         "kind": "build",
