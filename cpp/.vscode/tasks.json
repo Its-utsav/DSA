@@ -4,11 +4,20 @@
     {
       "label": "Compile and Run",
       "type": "shell",
-      "command": "bash",
-      "args": [
-        "-c",
-        "if [[ \"$OSTYPE\" == \"msys\" ]]; then g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension}.exe < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe; else g++ ${file} -o ${fileBasenameNoExtension} && ./${fileBasenameNoExtension} < ./input.txt > output.txt; fi"
-      ],
+      "windows": {
+        "command": "cmd",
+        "args": [
+          "/C",
+          "g++ ${file} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension}.exe < .\\input.txt > output.txt && del ${fileBasenameNoExtension}.exe"
+        ]
+      },
+      "linux": {
+        "command": "bash",
+        "args": [
+          "-c",
+          "g++ ${file} -o ${fileBasenameNoExtension} && ./${fileBasenameNoExtension} < ./input.txt > output.txt"
+        ]
+      },
       "group": {
         "kind": "build",
         "isDefault": true
