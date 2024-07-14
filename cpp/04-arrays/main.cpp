@@ -180,7 +180,7 @@ bool binarySearch(int arr[], int size, int key)
 // O(log n)
 {
     int start = 0;
-    int end = size;
+    int end = size - 1;
 
     while (start <= end)
     {
@@ -202,6 +202,120 @@ bool binarySearch(int arr[], int size, int key)
     return false;
 }
 
+int firstOccurInSortedArray(int arr[], int size, int key)
+{
+    int start = 0;
+    int end = size - 1;
+    int index = -1;
+    while (start <= end)
+    {
+        int mid = start + (end - start) / 2;
+
+        if (arr[mid] == key)
+        {
+            index = mid;
+            end = mid - 1;
+        }
+        if (arr[mid] > key)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            // key > arr[mid]
+            start = mid + 1;
+        }
+    }
+    return index;
+}
+
+int lastOccurInSortedArray(int arr[], int size, int key)
+{
+    int start = 0;
+    int end = size - 1;
+    int index = -1;
+    while (start <= end)
+    {
+        int mid = start + (end - start) / 2;
+
+        if (arr[mid] == key)
+        {
+            index = mid;
+            start = mid + 1;
+        }
+        if (arr[mid] > key)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            // key > arr[mid]
+            start = mid + 1;
+        }
+    }
+    return index;
+}
+
+int countTheOccurOfElement(int arr[], int size, int key)
+{
+    int firstOcc = firstOccurInSortedArray(arr, size, key);
+    int lastOcc = lastOccurInSortedArray(arr, size, key);
+
+    return (lastOcc - firstOcc) + 1; // index start with 0
+}
+
+int peakElementInMountainArr(int arr[], int size)
+{
+    int start = 0;
+    int end = size - 1;
+
+    while (start < end)
+    {
+        int mid = start + (end - start) / 2;
+
+        if (arr[mid] < arr[mid + 1])
+        {
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid;
+        }
+    }
+    return arr[start];
+}
+
+int pivotElementInRoatedSortedArr(int arr[], int size)
+{
+    int start = 0;      // 0
+    int end = size - 1; // 4
+
+    while (start < end) // 2 < 2 X
+    {
+        int mid = start + (end - start) / 2;
+        //  it.count   index
+        // 1.  2
+        // 2. 1
+        // 3.
+        if (arr[mid] >= arr[0])
+        {
+            // 1. 1 >= 7 X
+            // 2. 9 >= 7 true 1
+
+            start = mid + 1;
+            // start = 2;
+        }
+        else
+        {
+            // arr[mid] < arr[0]
+            // 1 < 7 -> 1 true
+
+            end = mid;
+            // end = 2;
+        }
+    }
+    return arr[end]; // 1
+}
 int main()
 {
     // int arr[] = {1, 2, 3, 4, 5, 6};
@@ -236,9 +350,26 @@ int main()
     // swap012(arr, size);
     // printArray(arr, size);
 
-    int arr[] = {1, 2, 3, 4, 5, 6};
+    // int arr[] = {1, 2, 3, 4, 5, 6};
 
+    // int size = sizeof(arr) / sizeof(arr[0]);
+    // cout << "3 in arr = " << binarySearch(arr, size, 3) << endl;
+    // int arr[] = {1, 2, 3, 3, 5};
+    // find the first(left most) and last(right most) occurrence of element in sorted array
+    // first -> 3 index -> 2
+    // last -> 3 index - > 3;
+
+    // int size = sizeof(arr) / sizeof(arr[0]);
+    // cout << "First occurrence of 3 in array at = " << lastOccurInSortedArray(arr, size, 3) << endl;
+
+    // BS level ++
+
+    // int arr[] = {3, 4, 5, 1};
+    // int size = sizeof(arr) / sizeof(arr[0]);
+    // cout << "Peak Element in array = " << peakElementInMountainArr(arr, size) << endl;
+
+    int arr[] = {7, 9, 1, 2, 3};
     int size = sizeof(arr) / sizeof(arr[0]);
-    cout << "3 in arr = " << binarySearch(arr, size, 3) << endl;
+    cout << "Peak Element = " << pivotElementInRoatedSortedArr(arr, size);
     return 0;
 }
