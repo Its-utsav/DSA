@@ -285,7 +285,7 @@ int peakElementInMountainArr(int arr[], int size)
     return arr[start];
 }
 
-int pivotElementInRoatedSortedArr(int arr[], int size)
+int pivotElementInRotatedSortedArr(int arr[], int size)
 {
     int start = 0;      // 0
     int end = size - 1; // 4
@@ -315,6 +315,53 @@ int pivotElementInRoatedSortedArr(int arr[], int size)
         }
     }
     return arr[end]; // 1
+}
+
+long long int sqrtOfNumber(int number)
+{
+    int start = 0;
+    int end = number;
+
+    long long int ans = -1;
+
+    while (start <= end)
+    {
+        long long int mid = start + (end - start) / 2;
+        long long int square = mid * mid;
+
+        if (square > number)
+        {
+            end = mid - 1;
+        }
+        else if (square < number)
+        {
+            start = mid + 1;
+            ans = mid;
+        }
+        else if (square == number)
+        {
+            return mid;
+        }
+    }
+    return ans;
+}
+
+double morePrecision(int number)
+{
+    double sqrtOfn = sqrtOfNumber(number);
+
+    int precisionCount = 3;
+
+    double factor = 1;
+    for (int i = 0; i < precisionCount; i++)
+    {
+        factor /= 10; // 0.1 - >  0.01 -> 0.001 -> 0.0001
+        for (double j = sqrtOfn; j * j < number; j += factor)
+        {
+            sqrtOfn = j;
+        }
+    }
+    return sqrtOfn;
 }
 int main()
 {
@@ -368,8 +415,10 @@ int main()
     // int size = sizeof(arr) / sizeof(arr[0]);
     // cout << "Peak Element in array = " << peakElementInMountainArr(arr, size) << endl;
 
-    int arr[] = {7, 9, 1, 2, 3};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    cout << "Peak Element = " << pivotElementInRoatedSortedArr(arr, size);
+    // int arr[] = {7, 9, 1, 2, 3};
+    // int size = sizeof(arr) / sizeof(arr[0]);
+    // cout << "Peak Element = " << pivotElementInRotatedSortedArr(arr, size);
+    int num = 27; // 5.19615242 focus of 5;
+    cout << "Sqrt of " << num << " : " << morePrecision(num) << endl;
     return 0;
 }
