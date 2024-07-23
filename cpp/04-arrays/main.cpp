@@ -363,6 +363,123 @@ double morePrecision(int number)
     }
     return sqrtOfn;
 }
+
+bool checkPossibleSolution(int arr[], int size, int numOfStudent, int mid) // O n
+{
+    int studentCount = 1;
+    int pageSum = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        // check for x student how many book are allocated
+        if (pageSum + arr[i] <= mid)
+        {
+            pageSum += arr[i];
+        }
+        else
+        {
+            studentCount++; // reach mid means need more student
+
+            if (arr[i] > mid || studentCount > numOfStudent)
+            {
+                return false;
+            }
+            // pageSum= 0;
+            pageSum = arr[i];
+        }
+    }
+
+    return true;
+}
+
+int bookAllocation(int arr[], int size, int numOfStudent)
+{
+    int start = 0;
+    int sum = 0; // for sum of all page
+
+    for (int i = 0; i < size; i++)
+    {
+        sum += arr[i];
+    }
+
+    int end = sum; // search range
+    int ans = -1;
+
+    while (start <= end) // O (log n)
+    {
+        int mid = start + (end - start) / 2;
+        // check possible solution
+        if (checkPossibleSolution(arr, size, numOfStudent, mid))
+        {
+            // if mid is ans than store and try to get an other answer from left side
+            ans = mid;
+            end = mid - 1;
+        }
+        else
+        {
+            // mid is not a answer than move right
+            start = mid + 1;
+        }
+    }
+
+    return ans;
+}
+
+bool checkPainterMid(int arr[], int size, int numOfPainter, int mid)
+{
+    int painterNumber = 1;
+    int lengthOfBoard = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        if (lengthOfBoard + arr[i] <= mid)
+        {
+            // check length is bigger than mid or not
+            // not than added to length other wise new painter
+            lengthOfBoard += arr[i];
+        }
+        else
+        {
+            if (painterNumber > numOfPainter || arr[i] > mid)
+            // if painter count bigger than total painter
+            // array current value is bigger than mid
+            // for both current mid is not an answer
+            {
+                return false;
+            }
+            painterNumber++;
+            lengthOfBoard = arr[i];
+        }
+    }
+    return true;
+}
+int painterProblem(int arr[], int size, int numOfPainter)
+{
+    // some of all each board length
+    int sum = 0, start = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum += arr[i];
+    }
+    int end = sum;
+    int ans = -1;
+    while (start <= end)
+    {
+        int mid = start + (end - start) / 2;
+        if (checkPainterMid(arr, size, numOfPainter, mid))
+        {
+            // if mid is possible ans than store it and go left (min)
+            ans = mid;
+            end = mid - 1;
+        }
+        else
+        {
+            // find bigger number
+            start = mid + 1;
+        }
+    }
+    return ans;
+}
 int main()
 {
     // int arr[] = {1, 2, 3, 4, 5, 6};
@@ -418,7 +535,16 @@ int main()
     // int arr[] = {7, 9, 1, 2, 3};
     // int size = sizeof(arr) / sizeof(arr[0]);
     // cout << "Peak Element = " << pivotElementInRotatedSortedArr(arr, size);
-    int num = 27; // 5.19615242 focus of 5;
-    cout << "Sqrt of " << num << " : " << morePrecision(num) << endl;
+    // int num = 27; // 5.19615242 focus of 5;
+    // cout << "Sqrt of " << num << " : " << morePrecision(num) << endl;
+
+    // BOOK allocation O (n log n or s)
+    // Painter's Partition Problem
+    int arr[] = {10, 20, 30, 40};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    // cout << "The Answer is " << bookAllocation(arr, size, 2) << endl;
+    cout << "The Answer is " << painterProblem(arr, size, 2) << endl;
+
     return 0;
 }
