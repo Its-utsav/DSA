@@ -6,6 +6,7 @@
     - [how to calculate TC and SC](#how-to-calculate-tc-and-sc)
     - [hakes of Big O notions](#hakes-of-big-o-notions)
   - [Be a Problem Solver](#be-a-problem-solver)
+    - [Some Problem with simple solution](#some-problem-with-simple-solution)
 
 
 ## Time and space complexity
@@ -86,3 +87,71 @@
 3. Break It down
 4. Solve / simplify
 5. Look back and refactor
+
+- Explore the Examples
+1. start with some simple example
+2. progress the some complex example
+3. go for empty than invalid input
+
+
+### Some Problem with simple solution
+
+1. count the character in string
+   -----
+   1. For this problem first question should be that is space , special character will count ?
+   2. What is some character have different case eg 'H' in _upper case_ and same 'h' in _lower case_ than what should do ?
+   3. What if when wrong input like number , object etc instead of string  ?
+   -----
+   1. We will count only alphanumeric values , all character in lower case
+   2. We count the each character in sting , put that count in object and return it.
+   ----
+   - answer in simple languages
+   - ```txt
+      1. make an empty object that will return at end
+      2. loop over the each character
+         2.1 if given character is a key in object than count value plus by one
+         2.2 if give character not in object than add that character in object as key and set its value as 1
+         2.3 if given character is not a alphanumeric than ignore that character 
+      3. return that object 
+      ```
+      1. first solution
+         ```js
+         function countChar(str) {
+         if (typeof str != 'string')
+            return `function input should be string but got ${typeof str}`;
+         let result = {};
+         let strLen = str.length;
+         for (let i = 0; i < strLen; i++) {
+            let char = str[i].toLowerCase()
+            if (result[char] > 0) {
+                  result[char]++;
+            } else {
+                  result[char] = 1;
+            }
+         }
+         return result;
+         }
+         console.log(countChar(' '));
+         ```
+      2. second solution
+         1. we can use for... of loop 
+         2. here might be regex expression can be time consuming 
+         ```js
+         
+         function countChar(str) {
+            let result = {};
+               for (let char of str) {
+                  char = char.toLowerCase();
+                     if (/[a-z0-9]/.test(str)) {
+                        if (result[char] > 0) {
+                           result[char]++;
+                        } else {
+                           result[char] = 1;
+                        }
+                     }
+               }
+            return result;
+         }
+
+         console.log(countChar('Utsav'));
+         ``` 
