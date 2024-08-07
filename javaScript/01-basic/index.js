@@ -133,5 +133,109 @@ function same(arr1, arr2) {
 }
 
 
-console.log(same([1, 2, 3], [1, 4, 9]));
-console.log('lol')
+// console.log(same([1, 2, 3], [1, 4, 9]));
+function validAnagram(str1, str2) {
+    // check th string
+    if (typeof str1 !== 'string' || typeof str2 !== 'string') {
+        return Error(`Need String but 'got ' ${typeof str1 == 'string' ? typeof str2 : typeof str1}`);
+    }
+
+    if (str1.length !== str2.length) {
+        return false;
+    }
+
+    let charFrequency = {};
+
+    for (let char of str1) {
+        charFrequency[char] ? charFrequency[char]++ : charFrequency[char] = 1;
+    }
+
+    for (let char of str2) {
+        if (!charFrequency[char]) {
+            return false;
+        }
+        charFrequency[char]--;
+    }
+
+    return true;
+}
+// console.log(validAnagram('pot', 'top'));
+
+function findPair(arr) {
+    let arrLength = arr.length
+    if (arrLength < 2) {
+        return false;
+    }
+
+    let start = 0;
+    let end = arrLength - 1;
+
+    while (start < end) {
+        let sum = arr[start] + arr[end];
+        if (sum == 0) {
+            return [arr[start], arr[end]]
+        } else if (sum < 0) {
+            start++;
+        } else {
+            end--;
+        }
+    }
+    return undefined;
+}
+
+
+// console.log(findPair([-4, -3]));
+
+
+function countUniqueInArr(arr) {
+    if (arr.length === 0) return 0;
+
+    /// solution 1
+    // let p1 = 0;
+    // let arrLength = arr.length;
+    // let uniqueCount = 0;
+    // for (let p2 = 1; p2 < arrLength; p2++) {
+    //     // console.log(arr[p1], arr[p2])
+    //     if (arr[p1] != arr[p2]) {
+    //         uniqueCount++;
+    //     }
+    //     p1++;
+    // }
+    // return uniqueCount;
+
+
+    // solution 2
+    let i = 0;
+    for (let j = 1; j < arr.length; j++) {
+        if (arr[i] != arr[j]) {
+            i++;
+            arr[i] = arr[j];
+        }
+    }
+    return i + 1;
+}
+
+// console.log(countUniqueInArr([1, 2, 3, 4, 5, 6]));
+
+function maxSubarraySum(arr, n) {
+    if (arr.length < n || arr.length == 0) {
+        return null;
+    }
+    // One brute force
+    let max = -Infinity;
+    let arrLength = arr.length;
+    for (let i = 0; i < arrLength - 1; i++) {
+        let temp = 0;
+        for (let j = 0; j < n; j++) {
+            temp += arr[i + j];
+            console.log(` ${arr[i]} + ${arr[j]} ${temp}`);
+        }
+        if (temp > max) {
+            max = temp;
+        }
+    }
+    return max;
+}
+
+
+console.log(maxSubarraySum([4, 2, 1, 6, 2], 4))

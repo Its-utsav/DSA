@@ -11,6 +11,9 @@
     - [Frequency Counter](#frequency-counter)
       - [where we use ?](#where-we-use-)
       - [why we use it ?](#why-we-use-it-)
+    - [Multiple Pointer](#multiple-pointer)
+    - [Sliding Window](#sliding-window)
+    - [](#)
 
 
 ## Time and space complexity
@@ -202,9 +205,9 @@ console.log(countChar('Utsav Dhimmar'));
 
 - list of some common problem solving patterns
 - some have different name , some pattern don't have name , some name are just for writing purpose 
-1. [Frequency Counter]()
-2. Multiple Pointer
-3. Sliding Window
+1. [Frequency Counter](#frequency-counter)
+2. [Multiple Pointer](#multiple-pointer)
+3. [Sliding Window](#sliding-window)
 4. Divide and Conquer
 5. Dynamic Programming
 6. Greedy Algorithm
@@ -324,3 +327,151 @@ function same(arr1,arr2){
 same([1,2,3][1,4,9]);
 ```
 3. Given two strings, write a function to determine if the second string is an anagram of the first. An anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.  
+- with frequency counter 
+```js
+function validAnagram(str1, str2) {
+    // check th string
+    if (typeof str1 !== 'string' || typeof str2 !== 'string') {
+        return Error(`Need String but ${typeof str1 == 'string' ? 'got ' + typeof str2 : 'got ' + typeof str1}`);
+    }
+
+    if (str1.length !== str2.length) {
+        return false;
+    }
+
+    let charFrequency = {};
+
+    for (let char of str1) {
+        charFrequency[char] ? charFrequency[char]++ : charFrequency[char] = 1;
+    }
+
+    for (let char of str2) {
+        if (!charFrequency[char]) {
+            return false;
+        }
+        charFrequency[char]--;
+    }
+
+    return true;
+}
+```
+
+
+### Multiple Pointer
+- for this approach may other name available 
+- use multiple pointer (2 or more than 2)
+- specially for `array` even `string` or `liked list` type data structure (linear)
+- use multiple pointer to traverse the data structure , majority time all pointer will start for different positions and move as per condition 
+- searching pair of values , or as per problem 
+
+- TC $O(n)$ , CS $O(1)$
+
+- example 
+1. return that pair form array where sum of the two pair became zero 
+```js
+function findPair(arr) {
+    let arrLength = arr.length
+    if (arrLength < 2) return false;
+    let start = 0;
+    let end = arrLength - 1;
+    while (start < end) {
+        console.log(arr[start], arr[end]);
+        let sum = arr[start] + arr[end];
+        if (sum == 0) {
+            return [arr[start], arr[end]]
+        } else if (sum < 0) {
+            start++;
+        } else {
+            end--;
+        }
+    }
+    return false;
+}
+```
+
+2. find unique in array
+- ans 1
+```js
+
+function countUniqueInArr(arr) {
+    if (arr.length === 0) return 0;
+
+    /// solution 1
+    // let p1 = 0;
+    // let arrLength = arr.length;
+    // let uniqueCount = 0;
+    // for (let p2 = 1; p2 < arrLength; p2++) {
+    //     // console.log(arr[p1], arr[p2])
+    //     if (arr[p1] != arr[p2]) {
+    //         uniqueCount++;
+    //     }
+    //     p1++;
+    // }
+    // return uniqueCount;
+
+
+    // solution 2
+    let i = 0;
+    for (let j = 1; j < arr.length; j++) {
+        if (arr[i] != arr[j]) {
+            i++;
+            arr[i] = arr[j];
+        }
+    }
+    return i + 1;
+}
+
+```
+
+- ans 2 
+```js
+
+function countUniqueInArr(arr) {
+    if (arr.length === 0) return 0;
+
+    let p1 = 0;
+    let arrLength = arr.length;
+    let uniqueCount = 0;
+    for (let p2 = 1; p2 < arrLength; p2++) {
+        // console.log(arr[p1], arr[p2])
+        if (arr[p1] != arr[p2]) {
+            uniqueCount++;
+        }
+        p1++;
+    }
+    return uniqueCount;
+}
+
+```
+
+
+### Sliding Window
+- specially for `array` even `string` or `liked list` type data structure (linear)
+- in this problem solving pattern we create a window(not a real one) that slide on over elements to perform the operation on subset of element effectively 
+- some keyword to identify this technique `longest or shortest subrange or any value `
+- with this pattern we can solve problem in TC $O(n)$ , SC $O(1)$ which may be solve in  TC $O(n^2)$ ot $O(2^n)$ CS
+
+1. Write a function called `maxSubarraySum` which accepts an `array of integers` and a number called `n`. The function should calculate the `maximum sum of n consecutive elements in the array`.
+- ans  TC $O(n^2)$
+```js
+function maxSubarraySum(arr, n) {
+    if (arr.length < n || arr.length == 0) {
+        return null;
+    }
+    let max = -Infinity;
+    let arrLength = arr.length;
+    for (let i = 0; i < arrLength - 1; i++) {
+        let temp = 0;
+        for (let j = 0; j < n; j++) {
+            temp += arr[i + j];
+            console.log(temp);
+        }
+        if (temp > max) {
+            max = temp;
+        }
+    }
+    return max;
+}
+```
+
+###
