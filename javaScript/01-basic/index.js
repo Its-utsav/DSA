@@ -222,20 +222,52 @@ function maxSubarraySum(arr, n) {
         return null;
     }
     // One brute force
-    let max = -Infinity;
-    let arrLength = arr.length;
-    for (let i = 0; i < arrLength - 1; i++) {
-        let temp = 0;
-        for (let j = 0; j < n; j++) {
-            temp += arr[i + j];
-            console.log(` ${arr[i]} + ${arr[j]} ${temp}`);
-        }
-        if (temp > max) {
-            max = temp;
-        }
+    // let max = -Infinity;
+    // let arrLength = arr.length;
+    // for (let i = 0; i < arrLength - 1; i++) {
+    //     let temp = 0;
+    //     for (let j = 0; j < n; j++) {
+    //         temp += arr[i + j];
+    //         console.log(` ${arr[i]} + ${arr[j]} ${temp}`);
+    //     }
+    //     if (temp > max) {
+    //         max = temp;
+    //     }
+    // }
+    // return max;
+    //  with sliding windows
+    let maxSum = 0;
+    let tempSum = 0;
+    for (let i = 0; i < n; i++) {
+        maxSum += arr[i];
     }
-    return max;
+    tempSum = maxSum;
+    for (let i = n; i < arr.length; i++) {
+        let afterNextAdd = tempSum - arr[i - n] + arr[i];
+        maxSum = Math.max(afterNextAdd, tempSum);
+    }
+
+    return maxSum;
 }
 
 
-console.log(maxSubarraySum([4, 2, 1, 6, 2], 4))
+function binarySearch(arr, n) {
+    let start = 0;
+    let end = arr.length - 1;
+
+
+    while (start <= end) {
+        let mid = Math.floor((end + start) / 2);
+
+        if (arr[mid] === n) {
+            return mid;
+        } else if (arr[mid] > n) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+
+    return -1;
+}
+// console.log(maxSubarraySum([4, 2, 1, 6, 2], 4))

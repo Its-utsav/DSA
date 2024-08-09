@@ -9,11 +9,9 @@
     - [Some Problem with simple solution](#some-problem-with-simple-solution)
   - [some common problem solving patterns or approach](#some-common-problem-solving-patterns-or-approach)
     - [Frequency Counter](#frequency-counter)
-      - [where we use ?](#where-we-use-)
-      - [why we use it ?](#why-we-use-it-)
     - [Multiple Pointer](#multiple-pointer)
     - [Sliding Window](#sliding-window)
-    - [](#)
+    - [Divide and Conquer](#divide-and-conquer)
 
 
 ## Time and space complexity
@@ -208,7 +206,7 @@ console.log(countChar('Utsav Dhimmar'));
 1. [Frequency Counter](#frequency-counter)
 2. [Multiple Pointer](#multiple-pointer)
 3. [Sliding Window](#sliding-window)
-4. Divide and Conquer
+4. [Divide and Conquer](#divide-and-conquer)
 5. Dynamic Programming
 6. Greedy Algorithm
 7. Backtracking Algorithm
@@ -219,9 +217,9 @@ console.log(countChar('Utsav Dhimmar'));
 - most help way to solve problem in computer science
 - commonly used with array or string
 - Named Frequency Counter because when we use it we create an object or a set , along with how many time element appeared in array or string, the element usually key and value is that how many time that element appeared .
-#### where we use ?
+- where we use ?
 - compare data in some way example , string anagram , compare array with array some way  
-#### why we use it ?
+- why we use it ?
 - it often used when we need to avoid nested loop resulting reducing the time complexity of program
 - With this pattern we can solve problem that have $O(n^2)$ complexity  , we can down that time complexity to $O(n)$
 - It can be apply to the string due to string is an array of a character , so we can performs operation using with their index .
@@ -356,7 +354,6 @@ function validAnagram(str1, str2) {
 }
 ```
 
-
 ### Multiple Pointer
 - for this approach may other name available 
 - use multiple pointer (2 or more than 2)
@@ -452,8 +449,8 @@ function countUniqueInArr(arr) {
 - with this pattern we can solve problem in TC $O(n)$ , SC $O(1)$ which may be solve in  TC $O(n^2)$ ot $O(2^n)$ CS
 
 1. Write a function called `maxSubarraySum` which accepts an `array of integers` and a number called `n`. The function should calculate the `maximum sum of n consecutive elements in the array`.
-- ans  TC $O(n^2)$
-```js
+- ans  TC $O(n^2)$ no sliding window
+```js 
 function maxSubarraySum(arr, n) {
     if (arr.length < n || arr.length == 0) {
         return null;
@@ -474,4 +471,55 @@ function maxSubarraySum(arr, n) {
 }
 ```
 
-###
+2. with sliding windows
+- we subtract previous value(so second loop start from num not from `0` or `1`) and add next value 
+- TC $O(n)$
+```js
+
+function maxSubarraySum(arr, n) {
+    if (arr.length < n || arr.length == 0) return null
+    let maxSum = 0;
+    let tempSum = 0;
+    for (let i = 0; i < n; i++) {
+        maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = n; i < arr.length; i++) {
+        let afterNextAdd = tempSum - arr[i - n] + arr[i];
+        maxSum = Math.max(afterNextAdd, tempSum);
+    }
+
+    return maxSum;
+}
+```
+
+### Divide and Conquer
+- Divide Problem into smaller subproblem instead of solving  of large problem solution we solve subproblem solution and combine the solution of subproblem to solve larger problem .
+- It has 3 stages 
+- 1. `Divide`  Divide into subproblem
+- 2. `Conquer` - solve that subproblem
+- 3. `Merge` - combine that subproblem
+- It is Advanced type of pattern , we use many place
+- On of the biggest example of the divide and conquer is [binary search] 
+```js
+
+function binarySearch(arr, n) {
+    let start = 0;
+    let end = arr.length - 1;
+
+
+    while (start <= end) {
+        let mid = Math.floor((end + start) / 2);
+
+        if (arr[mid] === n) {
+            return mid;
+        } else if (arr[mid] > n) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+
+    return -1;
+}
+```
